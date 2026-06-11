@@ -83,3 +83,66 @@ Explanation:
 =================================================
 
 """
+class BankAccount:
+    def __init__(self, name, account_number, opening_balance=0):
+        self.name = name
+        self.account_number = account_number
+
+        if opening_balance < 0:
+            print("Opening balance cannot be negative. Setting balance to 0.")
+            self.balance = 0
+        else:
+            self.balance = opening_balance
+
+    def deposit(self, amount):
+        if amount <= 0:
+            print(f"Deposit amount must be > 0 (got {amount})")
+        else:
+            self.balance += amount
+
+    def withdraw(self, amount):
+        if amount <= 0:
+            print(f"Withdrawal amount must be > 0 (got {amount})")
+        elif amount > self.balance:
+            print(f"Insufficient funds for {self.name} (balance={self.balance}, asked={amount})")
+        else:
+            self.balance -= amount
+
+    def get_balance(self):
+        return self.balance
+
+    def __str__(self):
+        return f"Account[{self.account_number} - {self.name}]: ${self.balance}"
+
+
+# Account 1
+name1 = input("Enter account holder name: ")
+acc_no1 = input("Enter account number: ")
+balance1 = float(input("Enter opening balance: "))
+
+a1 = BankAccount(name1, acc_no1, balance1)
+
+# Account 2
+name2 = input("Enter account holder name: ")
+acc_no2 = input("Enter account number: ")
+balance2 = float(input("Enter opening balance: "))
+
+a2 = BankAccount(name2, acc_no2, balance2)
+
+# Operations for Account 1
+deposit1 = float(input(f"Enter deposit amount for {a1.name}: "))
+a1.deposit(deposit1)
+
+withdraw1 = float(input(f"Enter withdrawal amount for {a1.name}: "))
+a1.withdraw(withdraw1)
+
+# Operations for Account 2
+deposit2 = float(input(f"Enter deposit amount for {a2.name}: "))
+a2.deposit(deposit2)
+
+withdraw2 = float(input(f"Enter withdrawal amount for {a2.name}: "))
+a2.withdraw(withdraw2)
+
+print("\nAccount Details:")
+print(a1)
+print(a2)
