@@ -89,3 +89,51 @@ Explanation:
 =================================================
 
 """
+class Counter:
+    total = 0
+
+    def __init__(self, name):
+        self.name = name
+        self.count = 0
+
+    def increment(self, step=1):
+        self.count += step
+        Counter.total += step
+
+    def reset(self):
+        self.count = 0
+
+    def __str__(self):
+        return f"{self.name}: count={self.count}"
+
+    @staticmethod
+    def show_total():
+        return Counter.total
+
+
+# Driver Code
+
+counters = []
+
+n = int(input("Enter number of counters: "))
+
+for i in range(n):
+    name = input(f"Enter name for counter {i+1}: ")
+    c = Counter(name)
+
+    step = int(input(f"Enter increment value for {name}: "))
+    c.increment(step)
+
+    counters.append(c)
+
+reset_name = input("Enter counter name to reset: ")
+
+for c in counters:
+    if c.name == reset_name:
+        c.reset()
+
+print("\nCounter Details:")
+for c in counters:
+    print(c)
+
+print("Total across all counters:", Counter.show_total())
